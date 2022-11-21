@@ -1,15 +1,17 @@
-all: main
+all:
+	gcc -o shell_ls shell_ls.c
+	gcc -o shell_cat shell_cat.c
+	gcc -o shell_date shell_date.c
+	gcc -o shell_mkdir shell_mkdir.c
+	gcc -o shell_rm shell_rm.c
+	gcc -o main main.c
+	./main
 
-CC = clang
-override CFLAGS += -g -Wno-everything -pthread -lm
+	rm -f *.out *.o
+	rm shell_ls
+	rm shell_date
+	rm shell_cat
+	rm shell_mkdir
+	rm shell_rm
 
-SRCS = $(shell find . -name '.ccls-cache' -type d -prune -o -type f -name '*.c' -print)
 
-main: $(SRCS)
-	$(CC) $(CFLAGS) $(SRCS) -o "$@"
-
-main-debug: $(SRCS)
-	$(CC) $(CFLAGS) -O0 $(SRCS) -o "$@"
-
-clean:
-	rm -f main main-debug

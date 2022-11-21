@@ -37,18 +37,6 @@ int shell_cd(char** args){
 		int x = chdir(getenv("HOME"));
 		return 1;
 	}
-	else if(strcmp(args[1], "-L") == 0){
-		if (chdir(args[2]) == -1) {
-			printf(" %s: no such directory\n", args[2]);
-            return 1;
-		}
-	}
-	else if(strcmp(args[1], "-P") == 0){
-		if (chdir(args[2]) == -1) {
-			printf(" %s: no such directory\n", args[2]);
-            return 1;
-		}
-	}
 	else{ 
 		if (chdir(args[1]) == -1) {
 			printf(" %s: no such directory\n", args[1]);
@@ -81,22 +69,7 @@ int shell_echo(char** args){
 }
 
 int shell_pwd(char** args){
-	// printf("%s", args[1]);
-	if (args[1] == NULL){
-		printf("%s\n", getcwd(cwd, 1024));
-	}
-	else if (strcmp(args[1], "-L") == 0){
-		printf("%s\n", getcwd(cwd, 1024));
-	}
-	else if (strcmp(args[1], "-P") == 0){
-		printf("%s\n", getcwd(cwd, 1024));
-	}
-	else{
-		printf("invalid input");
-	}
-	// else{
-	// 	printf("invalid input!");
-	// }
+	printf("%s\n", getcwd(cwd, 1024));
 	return 1;
 }
 
@@ -240,7 +213,7 @@ void loop(){
 		char str[MAX_LEN];
    		char* x = fgets(str, MAX_LEN, stdin);
 		char** args;
-		args = malloc(MAX_ARGS * sizeof(char*));
+		args = malloc(MAX_ARGS * sizeof(char*));;
 		char *token = strtok(str, " ");
    
     int i = 0;
